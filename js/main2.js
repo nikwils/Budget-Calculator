@@ -51,6 +51,7 @@ class AppData {
     this.moneyDeposit = 0;
     }
     startMoney() {
+
     this.budget = +salaryAmount.value;
 
     this.getExpenses();
@@ -217,16 +218,32 @@ class AppData {
     }
     eventsListeners(){
         startMoney.addEventListener('click' , function() {
+            
             if (!isNumber(salaryAmount.value) || salaryAmount.value === '') {
                 startMoney.disabled = true;
-                return;
+                return true;
             
             } else {
-                 startMoney.disabled = false;
+
+                if(depositBank.value === 'other'){  
+                    const value = +depositPercent.value;
+                    if(value > 0 && value < 100){
+                        depositPercent.value = value;
+                        
+                    console.log(depositPercent.value);
+                    }else { 
+                        startMoney.disabled = true;
+                        alert('Введите корректное значение в поле проценты');
+                        return;
+                    }
+                } 
+
+                startMoney.disabled = false;
                 appData.startMoney();
                 document.getElementById('start').hidden = true;
                 cancelBtn.style.display = 'block';
             }
+           
         
             inputArr.forEach(function(item, i){
                 if (i < 12) {
@@ -234,22 +251,8 @@ class AppData {
                 }
         
             });
-
-            if(this.valueSelect === 'other'){  
-                depositPercent.value = +depositPercent.value;
-                if (!isNumber(depositPercent.value) || salaryAmount.value === '') {
-                    alert('Введите корректное значение в поле проценты');
-                    startMoney.disabled = true;
-                    return;
-                } 
-            }else if(depositPercent.value < 100 && depositPercent.value > 0){
-                    depositPercent.value = depositPercent.value;
-            } else { alert('Введите корректное значение в поле проценты');
-                    startMoney.disabled = true;
-                    return;
-            }
         
-    
+            
         });
         
         cancelBtn.addEventListener('click', function(){
@@ -272,11 +275,20 @@ class AppData {
         periodSelect.addEventListener('mousemove', appData.valuePeriodAmount);
 
         depositCheck.addEventListener('change', this.depositHandler.bind(this));
+        salaryAmount.addEventListener('click', function(){
+            startMoney.disabled = false;
+                return true;
+        });
+        depositPercent.addEventListener('click', function(){
+            startMoney.disabled = false;
+                return true;
+        });
     
     }
 };
  appData = new AppData();
 
 appData.eventsListeners();
+
 
 
