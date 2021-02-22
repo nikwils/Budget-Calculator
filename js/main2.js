@@ -197,6 +197,7 @@ class AppData {
         if (valueSelect === 'other') {
             depositPercent.style.display = 'inline-block';
         } else {
+            depositPercent.style.display = 'none';
             depositPercent.value = valueSelect;
         }
     }
@@ -281,7 +282,7 @@ class AppData {
         });
         depositPercent.addEventListener('click', function(){
             startMoney.disabled = false;
-                return true;
+            return true;
         });
     
     }
