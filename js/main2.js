@@ -296,12 +296,15 @@ class AppData {
 
             });
 
+            startMoney.disabled = false;
             depositPercent.style.display = 'none';
             periodSelect.value = periodSelect.min;
             periodAmount.innerHTML = periodSelect.value;
             document.getElementById('start').hidden = false;
             cancelBtn.style.display = 'none';
             incomePeriodValue.value = 0;
+            button0.style.display = 'inline-block';
+            button1.style.display = 'inline-block';
         });
         
         button1.addEventListener('click', appData.addExpensesBlock);
@@ -311,7 +314,6 @@ class AppData {
         depositCheck.addEventListener('change', this.depositHandler.bind(this));
         salaryAmount.addEventListener('click', function(){
             startMoney.disabled = false;
-                return true;
         });
     
     }
