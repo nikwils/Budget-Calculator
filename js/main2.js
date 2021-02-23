@@ -64,7 +64,7 @@ class AppData {
     this.getAddIncome();
 
     this.valuePeriodAmount();
-    this.getInfoDeposit()
+    this.getInfoDeposit();
     this.getBudget();
     this.showResult();
     this.calcSavedMoney();
@@ -216,8 +216,6 @@ class AppData {
     }
     eventsListeners(){
         startMoney.addEventListener('click' , function() {
-
-            
             
             if (!isNumber(salaryAmount.value) || salaryAmount.value === '') {
                 startMoney.disabled = true;
@@ -251,7 +249,7 @@ class AppData {
                 }
         
             });
-        
+            appData.valuePeriodAmount();
             
         });
         
