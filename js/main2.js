@@ -244,7 +244,7 @@ class AppData {
 
         
             inputArr.forEach(function(item, i){
-                if (i < 18) {
+                if (i < 20) {
                     item.disabled = true;
                 }
         
@@ -296,7 +296,7 @@ class AppData {
 
             });
 
-
+            depositPercent.style.display = 'none';
             periodSelect.value = periodSelect.min;
             periodAmount.innerHTML = periodSelect.value;
             document.getElementById('start').hidden = false;
