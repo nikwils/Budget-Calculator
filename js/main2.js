@@ -2,6 +2,7 @@
 
 
 const startMoney = document.getElementById('start'),
+option = document.querySelector('option'),
 cancelBtn = document.getElementById('cancel'),
 button0 = document.getElementsByTagName('button')[0],
 button1 = document.getElementsByTagName('button')[1],
@@ -16,7 +17,6 @@ salaryAmount = document.querySelector('.salary-amount'),
 incomeTitle = document.querySelector('.income-title'),
 expensesTitle = document.querySelector('.expenses-title'),
 additionalExpensesItem = document.querySelector('.additional_expenses-item'),
-depositBank = document.querySelector('.deposit-bank'),
 depositAmount = document.querySelector('.deposit-amount'),
 depositPercent = document.querySelector('.deposit-percent'),
 targetAmount = document.querySelector('.target-amount'),
@@ -26,9 +26,10 @@ budgetMonthValue = document.querySelector('.budget_month-value'),
 inputArr = document.querySelectorAll('input');
 let incomeItems = document.querySelectorAll('.income-items'),
 expensesItems = document.querySelectorAll('.expenses-items'),
-incomePeriodValue = document.querySelectorAll('.result-total')[5];
+incomePeriodValue = document.querySelectorAll('.result-total')[5],
+depositBank = document.querySelector('.deposit-bank');
 
-
+console.dir(depositBank.childNodes[1]);
 const isNumber = function(n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
 };
@@ -197,7 +198,6 @@ class AppData {
         if (valueSelect === 'other') {
             depositPercent.style.display = 'inline-block';
         } else {
-            depositPercent.style.display = 'none';
             depositPercent.value = valueSelect;
         }
     }
@@ -264,6 +264,8 @@ class AppData {
                 }
         
             });
+            depositBank.value = depositBank.childNodes[1];
+            depositPercent.style.display = 'none';
             inputArr[12].value = 1;
             periodAmount.innerHTML = periodSelect.value;
             document.getElementById('start').hidden = false;
