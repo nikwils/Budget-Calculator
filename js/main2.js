@@ -2,7 +2,6 @@
 
 
 const startMoney = document.getElementById('start'),
-option = document.querySelector('option'),
 cancelBtn = document.getElementById('cancel'),
 button0 = document.getElementsByTagName('button')[0],
 button1 = document.getElementsByTagName('button')[1],
@@ -29,7 +28,7 @@ expensesItems = document.querySelectorAll('.expenses-items'),
 incomePeriodValue = document.querySelectorAll('.result-total')[5],
 depositBank = document.querySelector('.deposit-bank');
 
-console.dir(depositBank.childNodes[1]);
+
 const isNumber = function(n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
 };
@@ -37,7 +36,7 @@ const isNumber = function(n) {
 let appData;
 
 class AppData {
-    constructor(budget, budgetDay, budgetMonth, expensesMonth, income, incomeMonth, addIncome, expenses, addExpenses, deposit, percentDeposit, moneyDeposit){
+    constructor(){
     this.budget = 0;
     this.budgetDay = 0;
     this.budgetMonth = 0;
@@ -47,6 +46,7 @@ class AppData {
     this.addIncome =[];
     this.expenses ={};
     this.addExpenses =[];
+    this.arrOptions = [];
     this.deposit = false;
     this.percentDeposit = 0;
     this.moneyDeposit = 0;
@@ -190,9 +190,6 @@ class AppData {
             this.moneyDeposit = depositAmount.value;
          }
     }
-    valuePercent(){
-
-    }
     changePercent(){
         const valueSelect = this.value;
         if (valueSelect === 'other') {
@@ -214,11 +211,13 @@ class AppData {
             depositBank.value = '';
             depositAmount.value = '';
             this.deposit = false;
-            depositBank.removeEventListener('change', this.changePercent)
+            depositBank.removeEventListener('change', this.changePercent);
         }
     }
     eventsListeners(){
         startMoney.addEventListener('click' , function() {
+
+            
             
             if (!isNumber(salaryAmount.value) || salaryAmount.value === '') {
                 startMoney.disabled = true;
@@ -238,12 +237,12 @@ class AppData {
                         return;
                     }
                 } 
-
+                
                 startMoney.disabled = false;
                 appData.startMoney();
                 document.getElementById('start').hidden = true;
                 cancelBtn.style.display = 'block';
-            }
+            };
            
         
             inputArr.forEach(function(item, i){
@@ -264,7 +263,16 @@ class AppData {
                 }
         
             });
-            depositBank.value = depositBank.childNodes[1];
+
+            
+            let options = document.querySelectorAll('option');
+        
+            options.forEach((item, i) => {
+                if (i > 0) {
+                    item.remove();
+                }
+            });
+
             depositPercent.style.display = 'none';
             inputArr[12].value = 1;
             periodAmount.innerHTML = periodSelect.value;
