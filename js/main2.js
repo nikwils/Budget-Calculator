@@ -210,6 +210,10 @@ class AppData {
     }
     eventsListeners(){
         startMoney.addEventListener('click' , function() {
+            let incomeTitles = document.querySelectorAll('.income-title'),
+            incomeAmount = document.querySelectorAll('.income-amount'),
+            expensesTitles = document.querySelectorAll('.expenses-title'),
+            expensesAmount = document.querySelectorAll('.expenses-amount');
 
             
             inputArr = document.querySelectorAll('input');
@@ -232,7 +236,9 @@ class AppData {
                         alert('Введите корректное значение в поле проценты');
                         return;
                     }
-                } 
+                } else {
+                    startMoney.disabled = false;
+                }
                 
                 startMoney.disabled = false;
                 appData.startMoney();
@@ -249,7 +255,7 @@ class AppData {
                 }
         
             });
-
+            periodSelect.disabled = false;
             appData.valuePeriodAmount();
             
         });
